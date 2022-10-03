@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <title>Empresas</title>
+</head>
+<body>
+    <div class="container text-bg-dark"><h1 class="display-1 bg-gradient text-center text-light">Empresas</h1><h4> panel de usuario</h4>
+        <h6>
+            {% if user.is_authenticated%} {{user.email}}
+            <a href="{% url 'cerrar' %}">Cerrar sesion</a>
+            
+        </h6>
+    </div>
+<div class="container">
+    <div class="row">
+<!--
+    {% for empre in mensaje%}
+    <div class="card col" style="width: 18rem;">
+        <img src="https://uploads-ssl.webflow.com/5dae5419e69ca030d3775e57/5dae5419e69ca035cb775e87_city.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{empre.nombre}}</h5>
+      <p class="card-text">{{empre.sector_produc}}</p>
+    </div></div>  {% endfor %}
+    </div> -->
+
+
+    <!-- FORMULARIO PARA CONSULTAR EMPRESAS POR ID -->
+
+    <div class="container mt-5">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <form action="../consultarEmpresasUsu/" method="post">  <!-- el .. devuelve una ruta anterior ya que estaba saliendo listar empresas antes de consultar empresas -->
+                {% csrf_token %}
+                <div class="mb-2 ml-0"> 
+                <input autocomplete="off" type="text" name="id_empresas" required> <button type="submit" class="btn btn-primary"> Consultar </button>   <!-- el "idempresas" es el que debe ir en el POST de la vista -->
+                </div>
+
+            </form>
+            <a href="../listaEmpresasUsu/">
+                <button class="btn btn-primary me-md-2" type="button">Ver todas</button></a> 
+        </div>
+
+     <!-- MENSAJE CUANDO NO SE ENCUENTRA EL LA EMPRESA -->    
+    {% if Mensaje%}
+    <div class="container mt-2 aling-center alert alert-success" role="alert">
+    {{Mensaje}} 
+    </div>
+    {% endif %}
+    
+    {% if Error%}
+    <div class="container mt-2 aling-center alert alert-danger" role="alert">
+    {{Error}} 
+    </div>
+    {% endif %}  
+
+
+    <table class="table table-hover mt-3">
+    <thead>
+           <th>ID EMPRESA</th>
+           <th>NOMBRE</th>
+           <th>DIRECCIÓN</th>
+           <th>CIUDAD</th>
+           <th>NIT</th>   
+           <th>SEC.PRODUCTIVO</th>   
+           <th>TELÉFONO</th>   
+           <th>FECHA REGISTRO</th>   
+        </thead>
+        <body>
+
+    {% for empre in mensaje%}
+    <tr>
+        <td>{{empre.id_empresas}}</td>
+        <td>{{empre.nombre}}</td>
+        <td>{{empre.direccion}}</td>
+        <td>{{empre.ciudad}}</td>
+        <td>{{empre.nit}}</td>
+        <td>{{empre.sector_produc}}</td>
+        <td>{{empre.telefono}}</td>
+        <td>{{empre.fecha_creacion}}</td>
+       
+    </tr>
+    {% endfor %}
+
+         </body>
+    </table> </div>
+    {% else %} No ha iniciado sesión. {% endif %}
+
+
+    
+    
+<!--     <div class="container bg-danger">Hola</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 bg-primary" > Columna 1 </div>
+            <div class="col bg-success"> Columna 2 </div>
+            <div class="col bg-danger"> Columna 3 </div>
+        </div>
+        <div class="row">
+            <div class="col bg-danger" > Columna 1 </div>
+            <div class="col bg-primary"> Columna 2 </div>
+            <div class="col bg-success"> Columna 3 </div>
+        </div>
+    </div> -->
+</body>
+</html>

@@ -1,30 +1,41 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href='{% static "css/style.css"%}' type="text/css">
     <title>Pagina Principal</title>
-    
+
 </head>
 <body>
-    <header>
-        <div>
-            <div class="titulologo" id="titulologo-"><h1>Cine Colombiano.</h1></div>
-        <div>Imagen Logo</div></div>
-<div>
-<nav>
-    <ul type="square">
-        <li><a href="#otro lugar">Link 1</a> </li>
-        <li><a href="#otro lugar">Link 2</a> </li>
-        <li><a href="#otro lugar">Link 3</a> </li>
-        <li><a href="#otro lugar">Link 4</a> </li>
-    </ul>   
-</nav> 
+  <header class="contheader">
+    <div class="titulologo">    
+        <div class="titulolop"><h1>CINECOLOMBIANO</h1></div>
+    <div class="logo"></div>
+</div>
 
+
+<nav class="menu">
+    <ul>
+        <<!--<li class="lista"><a href="listaEmpresas/" target="_blank">Empresas</a> </li> -->
+        <<!--<li class="lista"><a href="#otro lugar">Link 2</a> </li> -->
+        <li class="lista"><a href="{% url 'ingresar' %}"> Ingresar </a></li> 
+    </ul>
+</nav>
+</header>  
+
+<main>
+    <div class="pelicula-principal">
+        <div class="contenedor">
+            <h3 class="titulo">CINECOLOMBIANO</h3>
+            <p class="descripcion">
+                Vive lo mejor del cine colombiano donde quiera que estés. Películas, series, documentales y más.
+            </p>
+        </div>
     </div>
-     
-</header>
+</main>
+
 </body>
 </html>

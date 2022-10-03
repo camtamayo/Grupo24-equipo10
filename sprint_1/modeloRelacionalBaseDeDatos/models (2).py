@@ -60,11 +60,12 @@ class Reporte_contable(models.Model):
 
 class Usuario_app (models.Model):
     id_usuario = models.IntegerField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-    usuario = models.CharField(max_length=45)
-    email = models.EmailField(max_length=45)
-    contraseña = models.CharField(max_length=45)
+    nombre = models.CharField(max_length=30)
+    usuario = models.CharField(max_length=30)
+    email = models.EmailField(max_length=30)
+    contraseña = models.CharField(max_length=30)
     empresas = models.ForeignKey(Empresas, on_delete=models.CASCADE)
+    
 
 class Comprobantes (models.Model):
     contabilidad = models.IntegerField(primary_key=True)

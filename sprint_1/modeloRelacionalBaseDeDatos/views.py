@@ -1,9 +1,9 @@
-#from django.shortcuts import render
+from django.shortcuts import render
 import json
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from modeloRelacionalBaseDeDatos.models import Empleado, Rol, Empresas, Reporte_contable
+from modeloRelacionalBaseDeDatos.models import Empleado, Rol, Empresas, Reporte_contable, Usuario_app
 from django.http import JsonResponse
 
 
@@ -23,15 +23,15 @@ class EmpresasView(View):
         if len(idempresas)>0:
             empresa=list(Empresas.objects.filter(id_empresas=idempresas).values())
             if len(empresa)>0:
-                datos={'Empresa':empresa}
+                datos={'mensaje':empresa, 'Mensaje':'Resultado de la busqueda.'}
             else:
-                datos={'mensaje':"No se encontró la empresa."} 
+                datos={'Error':"No se encontró la empresa."} 
         else:
             empresa=list(Empresas.objects.values()) #Empresas es del modelo Empresas y empresa es una variable nueva 
             if len(empresa)>0:
                 datos={"mensaje":empresa}
             else:
-                datos={"mensaje":"No se encontraron empresas."}
+                datos={"Error":"No se encontraron empresas."}
 
         return JsonResponse(datos)
 
@@ -151,19 +151,23 @@ class EmpleadoView(View):
 
     def post (self,request):
         data=json.loads(request.body)
-        print(data)
-        roles=Rol.objects.get(id_rol=data["rol"])
-        empre=Empresas.objects.get(id_empresas=data["empresas_id"])
-        emple=Empleado.objects.create(id_empleado=data["id_empleado"],empresas_id=empre, rol=roles,nombre=data['nombre'],apellido=data['apellido'],email=data['email'],telefono=data['telefono'],fecha_creacion=data['fecha_creacion'])
-        emple.save()
-        mensaje={"Mensaje":"Empleado registrado exitosamente"}
+        #print(data)
+        try: 
+            roles=Rol.objects.get(id_rol=data["rol"])
+            empre=Empresas.objects.get(id_empresas=data["empresas_id"])
+            emple=Empleado.objects.create(id_empleado=data["id_empleado"],empresas_id=empre, rol=roles,nombre=data['nombre'],apellido=data['apellido'],email=data['email'],telefono=data['telefono'],fecha_creacion=data['fecha_creacion'])
+            emple.save()
+            mensaje={"Mensaje":"Empleado registrado exitosamente"}
+        except Empresas.DoesNotExist:
+            mensaje={"Mensaje":"la empresa no existe"}
+        except Rol.DoesNotExist:
+            mensaje={"Mensaje":"el Rol no existe"}
 
         return JsonResponse(mensaje)
 
 
-         #FUNCION PARA ACTUALIZAR EMPLEADOS
+        #FUNCION PARA ACTUALIZAR EMPLEADOS
          
-
     def put(self,request,idempleado):
         data=json.loads(request.body)
         empleado=list(Empleado.objects.filter(id_empleado=idempleado).values())
@@ -180,9 +184,6 @@ class EmpleadoView(View):
             mensaje={"mensaje":"Empleado actualizado exitosamente"}
 
         return JsonResponse(mensaje)
-
-        
-            
 
 
 
@@ -213,8 +214,6 @@ class Reporte_contableView(View):
 
         return JsonResponse(datos)
 
-        #FUNCION PARA INGRESAR REPORTE CONTABLE
-
 
     def post (self,request):
         data=json.loads(request.body)
@@ -228,24 +227,33 @@ class Reporte_contableView(View):
 
         return JsonResponse(mensaje)
 
-
-
-
-    
-        
         
 
-    
-    
+#____________________USUARIO APP______________________
+
+ 
+
+class UsuarioView(View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
-    
+    #FUNCION PARA ACTUALIZAR USUARIO
 
-            
-       
+    def put(self,request,idusuario):
+        data=json.loads(request.body)
+        usuario=list(Usuario_app.objects.filter(id_usuario=idusuario).values())
+        if len(usuario)>0:
+            empre=Empresas.objects.get(id_empresas=data["empresas"])
+            usuari=Usuario_app.objects.get(id_usuario=data["id_usuario"])
+            usuari.nombre=data['nombre']
+            usuari.usuario=data['usuario']
+            usuari.email=data['email']
+            usuari.contraseña=data['contraseña']
+            usuari.save()
+            mensaje={"mensaje":"Usuario actualizado exitosamente"}
 
-         
+        return JsonResponse(mensaje)
 
-
-
-        

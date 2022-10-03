@@ -1,0 +1,108 @@
+body{
+    background-image: url(../css/img/FONDO-2.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.contheader{
+    background-color: rgb(0, 0, 0);
+    height: 150px;
+    display: flex;
+    align-items: center;
+    opacity: 85%;
+}
+
+.titulologo{
+ background-color: 0;
+ color:rgb(242, 6, 6);
+ width: 40%;
+ height: 100px;
+ margin-right: 60px;
+ margin-left: 20px;
+ display: flex;
+ justify-content: space-evenly;
+ align-items: center;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+/* LOGO COMENTADO MOMENTANEAMENTE
+.logo{
+    background-image: url("https://creazilla-store.fra1.digitaloceanspaces.com/emojis/46027/movie-camera-emoji-clipart-md.png");
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 40px;
+} */
+
+.menu{
+    background-color: 0;
+    width: 40%;
+    height: 50px;
+    display: flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+}
+
+.lista{
+    display: inline;
+    background-color: rgb(0, 0, 0);
+    width: 200px;
+    border-radius: 0px 0px;
+    padding: 20px 10px;
+}
+
+a{
+ text-decoration: none;
+ color: aliceblue;
+ font-size: 18px;
+}
+
+
+.titulolop{
+font-size: 20px;
+font-weight: bold;
+display: flex;
+align-items: center;
+}
+
+/* ---- ----- ----- Pelicula Principal ----- ----- ----- */
+.pelicula-principal {
+	font-size: 16px;
+	min-height: 40.62em;
+	color: rgb(255, 255, 255);
+    margin-right: 80px;
+    margin-left: -100px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+	/*background: linear-gradient(rgba(0, 0, 0, 0.5) 0%, rgba(0,0,0,.50) 100%), url(../css/img/FONDO.jpg); 
+	background-position:top;
+	background-size: cover;
+	display:flow-root;
+	align-items: end; */
+}
+
+.pelicula-principal .contenedor {
+	margin: 0 auto;
+	margin-bottom: 6.25em;
+}
+
+.pelicula-principal .titulo {
+	font-weight: 200;
+	font-size: 3.12em;
+	margin-bottom: 0.4em;
+}
+
+.pelicula-principal .descripcion {
+	font-weight: normal;
+	font-size: 1.5em;
+	line-height: 1em;
+	max-width: 50%;
+	margin-bottom: 3em;
+    margin-right: 60px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

@@ -29,7 +29,7 @@ class Empresas(models.Model):
     nit = models.CharField(max_length=45)
     sector_produc = models.CharField(max_length=45)
     telefono = models.CharField(max_length=45)
-    fecha_creacion = models.DateTimeField(auto_now=True)
+    fecha_creacion = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.nombre
@@ -55,7 +55,7 @@ class Reporte_contable(models.Model):
     empleado_id = models.ForeignKey(Empleado, on_delete=models.CASCADE)
     empleado_empresas = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     empleado_rol = models.ForeignKey(Rol, on_delete=models.CASCADE)
-    monto = models.IntegerField 
+    monto = models.IntegerField(45)
 
 
 class Usuario_app (models.Model):
@@ -69,7 +69,7 @@ class Usuario_app (models.Model):
 class Comprobantes (models.Model):
     contabilidad = models.IntegerField(primary_key=True)
     fecha = models.DateTimeField(auto_now=True)
-    valor = models.IntegerField
+    valor = models.IntegerField(45)
     empresas_id = models.ForeignKey(Empresas, on_delete=models.CASCADE)
     reporte = models.ForeignKey(Reporte_contable, on_delete=models.CASCADE)
 
